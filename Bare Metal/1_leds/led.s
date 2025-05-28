@@ -11,11 +11,11 @@ there are 5 steps to turn on the LED:
 _start:
     // 1. clock enables
     // enable clock for all peripherals
-    ldr r0, =0x020E0068 // register CCGR0
+    ldr r0, =0x020C4068 // register CCGR0
     ldr r1, =0xFFFFFFFF
     str r1, [r0]
 
-    ldr r0, =0x020C406c // register CCGR1
+    ldr r0, =0x020C406C // register CCGR1
     str r1, [r0]
 
     ldr r0, =0x020C4070 // register CCGR2
@@ -52,19 +52,19 @@ _start:
     *bit [0]: 0 low transition rate
     */
     ldr r0, =0x020E02F4 // register IOMUXC_SW_PAD_CTL_PAD_GPIO1_IO03
-    ldr r1, =0x10b0
+    ldr r1, =0x10B0
     str r1, [r0]
     //-------------------------------------------------------------
 
     // 4. set GPIO1_IO03 as output
     ldr r0, =0X0209C004 // register GPIO1_GDIR
-    ldr r1, =0x8 // set bit 3 to 1 as output
+    ldr r1, =0x00000008 // set bit 3 to 1 as output
     str r1, [r0]
     //-------------------------------------------------------------
 
     // 5. turn on LED
     ldr r0, =0X0209C000 // register GPIO1_DR
-    ldr r1, =0 // set bit 3 to 0 to turn on LED
+    ldr r1, =0x00000000 // set bit 3 to 0 to turn on LED
     str r1, [r0]
     //-------------------------------------------------------------
 
