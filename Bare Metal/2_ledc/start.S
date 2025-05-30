@@ -16,7 +16,7 @@ _start:
     msr cpsr, r0         // write back to cpsr
 
     // 2. set stack pointer
-    ldr sp, =0x 80200000  // set stack pointer to 0x80200000
+    ldr sp, =0x80200000  // set stack pointer to 0x80200000
 
     // 3. jump to main
-    j main              // jump to main function
+    b main              // jump to main function
