@@ -1,0 +1,166 @@
+
+ledc.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+87800000 <_start>:
+87800000:	e10f0000 	mrs	r0, CPSR
+87800004:	e3c0001f 	bic	r0, r0, #31
+87800008:	e3800013 	orr	r0, r0, #19
+8780000c:	e129f000 	msr	CPSR_fc, r0
+87800010:	e51fd000 	ldr	sp, [pc, #-0]	@ 87800018 <_start+0x18>
+87800014:	ea000046 	b	87800134 <main>
+87800018:	80200000 	eorhi	r0, r0, r0
+8780001c:	00001941 	andeq	r1, r0, r1, asr #18
+87800020:	61656100 	cmnvs	r5, r0, lsl #2
+87800024:	01006962 	tsteq	r0, r2, ror #18
+87800028:	0000000f 	andeq	r0, r0, pc
+8780002c:	00543405 	subseq	r3, r4, r5, lsl #8
+87800030:	01080206 	tsteq	r8, r6, lsl #4
+87800034:	00000109 	andeq	r0, r0, r9, lsl #2
+
+87800038 <clk_enable>:
+87800038:	e3e02000 	mvn	r2, #0
+8780003c:	e59f301c 	ldr	r3, [pc, #28]	@ 87800060 <clk_enable+0x28>
+87800040:	e5832068 	str	r2, [r3, #104]	@ 0x68
+87800044:	e583206c 	str	r2, [r3, #108]	@ 0x6c
+87800048:	e5832070 	str	r2, [r3, #112]	@ 0x70
+8780004c:	e5832074 	str	r2, [r3, #116]	@ 0x74
+87800050:	e5832078 	str	r2, [r3, #120]	@ 0x78
+87800054:	e583207c 	str	r2, [r3, #124]	@ 0x7c
+87800058:	e5832080 	str	r2, [r3, #128]	@ 0x80
+8780005c:	e12fff1e 	bx	lr
+87800060:	020c4000 	andeq	r4, ip, #0
+
+87800064 <led_init>:
+87800064:	e3a00005 	mov	r0, #5
+87800068:	e59f2028 	ldr	r2, [pc, #40]	@ 87800098 <led_init+0x34>
+8780006c:	e59f1028 	ldr	r1, [pc, #40]	@ 8780009c <led_init+0x38>
+87800070:	e5820068 	str	r0, [r2, #104]	@ 0x68
+87800074:	e59f3024 	ldr	r3, [pc, #36]	@ 878000a0 <led_init+0x3c>
+87800078:	e58212f4 	str	r1, [r2, #756]	@ 0x2f4
+8780007c:	e5932004 	ldr	r2, [r3, #4]
+87800080:	e3822008 	orr	r2, r2, #8
+87800084:	e5832004 	str	r2, [r3, #4]
+87800088:	e5932000 	ldr	r2, [r3]
+8780008c:	e3c22008 	bic	r2, r2, #8
+87800090:	e5832000 	str	r2, [r3]
+87800094:	e12fff1e 	bx	lr
+87800098:	020e0000 	andeq	r0, lr, #0
+8780009c:	000010b0 	strheq	r1, [r0], -r0
+878000a0:	0209c000 	andeq	ip, r9, #0
+
+878000a4 <led_on>:
+878000a4:	e59f200c 	ldr	r2, [pc, #12]	@ 878000b8 <led_on+0x14>
+878000a8:	e5923000 	ldr	r3, [r2]
+878000ac:	e3c33008 	bic	r3, r3, #8
+878000b0:	e5823000 	str	r3, [r2]
+878000b4:	e12fff1e 	bx	lr
+878000b8:	0209c000 	andeq	ip, r9, #0
+
+878000bc <led_off>:
+878000bc:	e59f200c 	ldr	r2, [pc, #12]	@ 878000d0 <led_off+0x14>
+878000c0:	e5923000 	ldr	r3, [r2]
+878000c4:	e3833008 	orr	r3, r3, #8
+878000c8:	e5823000 	str	r3, [r2]
+878000cc:	e12fff1e 	bx	lr
+878000d0:	0209c000 	andeq	ip, r9, #0
+
+878000d4 <delay_short>:
+878000d4:	e24dd008 	sub	sp, sp, #8
+878000d8:	e58d0004 	str	r0, [sp, #4]
+878000dc:	e59d3004 	ldr	r3, [sp, #4]
+878000e0:	e2432001 	sub	r2, r3, #1
+878000e4:	e3530000 	cmp	r3, #0
+878000e8:	e58d2004 	str	r2, [sp, #4]
+878000ec:	1afffffa 	bne	878000dc <delay_short+0x8>
+878000f0:	e28dd008 	add	sp, sp, #8
+878000f4:	e12fff1e 	bx	lr
+
+878000f8 <delay>:
+878000f8:	e24dd008 	sub	sp, sp, #8
+878000fc:	e58d0004 	str	r0, [sp, #4]
+87800100:	e59d3004 	ldr	r3, [sp, #4]
+87800104:	e2432001 	sub	r2, r3, #1
+87800108:	e3530000 	cmp	r3, #0
+8780010c:	e58d2004 	str	r2, [sp, #4]
+87800110:	0a000004 	beq	87800128 <delay+0x30>
+87800114:	e59f2014 	ldr	r2, [pc, #20]	@ 87800130 <delay+0x38>
+87800118:	e3520000 	cmp	r2, #0
+8780011c:	e2422001 	sub	r2, r2, #1
+87800120:	1afffffc 	bne	87800118 <delay+0x20>
+87800124:	eafffff5 	b	87800100 <delay+0x8>
+87800128:	e28dd008 	add	sp, sp, #8
+8780012c:	e12fff1e 	bx	lr
+87800130:	000007ff 	strdeq	r0, [r0], -pc	@ <UNPREDICTABLE>
+
+87800134 <main>:
+87800134:	e3e02000 	mvn	r2, #0
+87800138:	e59f3080 	ldr	r3, [pc, #128]	@ 878001c0 <main+0x8c>
+8780013c:	e92d4010 	push	{r4, lr}
+87800140:	e5832068 	str	r2, [r3, #104]	@ 0x68
+87800144:	e583206c 	str	r2, [r3, #108]	@ 0x6c
+87800148:	e5832070 	str	r2, [r3, #112]	@ 0x70
+8780014c:	e5832074 	str	r2, [r3, #116]	@ 0x74
+87800150:	e5832078 	str	r2, [r3, #120]	@ 0x78
+87800154:	e583207c 	str	r2, [r3, #124]	@ 0x7c
+87800158:	e5832080 	str	r2, [r3, #128]	@ 0x80
+8780015c:	ebffffc0 	bl	87800064 <led_init>
+87800160:	e59f005c 	ldr	r0, [pc, #92]	@ 878001c4 <main+0x90>
+87800164:	e5903000 	ldr	r3, [r0]
+87800168:	e3833008 	orr	r3, r3, #8
+8780016c:	e59f1054 	ldr	r1, [pc, #84]	@ 878001c8 <main+0x94>
+87800170:	e5803000 	str	r3, [r0]
+87800174:	e59f2050 	ldr	r2, [pc, #80]	@ 878001cc <main+0x98>
+87800178:	e3520000 	cmp	r2, #0
+8780017c:	e2422001 	sub	r2, r2, #1
+87800180:	1afffffc 	bne	87800178 <main+0x44>
+87800184:	e3510000 	cmp	r1, #0
+87800188:	e2411001 	sub	r1, r1, #1
+8780018c:	1afffff8 	bne	87800174 <main+0x40>
+87800190:	e5903000 	ldr	r3, [r0]
+87800194:	e3c33008 	bic	r3, r3, #8
+87800198:	e59f1028 	ldr	r1, [pc, #40]	@ 878001c8 <main+0x94>
+8780019c:	e5803000 	str	r3, [r0]
+878001a0:	e59f2024 	ldr	r2, [pc, #36]	@ 878001cc <main+0x98>
+878001a4:	e3520000 	cmp	r2, #0
+878001a8:	e2422001 	sub	r2, r2, #1
+878001ac:	1afffffc 	bne	878001a4 <main+0x70>
+878001b0:	e3510000 	cmp	r1, #0
+878001b4:	e2411001 	sub	r1, r1, #1
+878001b8:	1afffff8 	bne	878001a0 <main+0x6c>
+878001bc:	eaffffe8 	b	87800164 <main+0x30>
+878001c0:	020c4000 	andeq	r4, ip, #0
+878001c4:	0209c000 	andeq	ip, r9, #0
+878001c8:	000001f3 	strdeq	r0, [r0], -r3
+878001cc:	000007ff 	strdeq	r0, [r0], -pc	@ <UNPREDICTABLE>
+878001d0:	3a434347 	bcc	888d0ef4 <__bss_end+0x10d0cb5>
+878001d4:	72412820 	subvc	r2, r1, #32, 16	@ 0x200000
+878001d8:	4e47206d 	cdpmi	0, 4, cr2, cr7, cr13, {3}
+878001dc:	6f542055 	svcvs	0x00542055
+878001e0:	68636c6f 	stmdavs	r3!, {r0, r1, r2, r3, r5, r6, sl, fp, sp, lr}^
+878001e4:	206e6961 	rsbcs	r6, lr, r1, ror #18
+878001e8:	322e3431 	eorcc	r3, lr, #822083584	@ 0x31000000
+878001ec:	6c65522e 	stclvs	2, cr5, [r5], #-184	@ 0xffffff48
+878001f0:	42282031 	eormi	r2, r8, #49	@ 0x31
+878001f4:	646c6975 	strbtvs	r6, [ip], #-2421	@ 0xfffff68b
+878001f8:	6d726120 	ldclvs	1, cr6, [r2, #-128]!	@ 0xffffff80
+878001fc:	2e34312d 	cdpcs	1, 3, cr3, cr4, cr13, {1}
+87800200:	29293235 	stmdbcs	r9!, {r0, r2, r4, r5, r9, ip, sp}
+87800204:	2e343120 	cdpcs	1, 3, cr3, cr4, cr0, {1}
+87800208:	20312e32 	eorscs	r2, r1, r2, lsr lr
+8780020c:	34323032 	ldrtcc	r3, [r2], #-50	@ 0xffffffce
+87800210:	39313131 	ldmdbcc	r1!, {r0, r4, r5, r8, ip, sp}
+87800214:	00294100 	eoreq	r4, r9, r0, lsl #2
+87800218:	65610000 	strbvs	r0, [r1, #-0]!
+8780021c:	00696261 	rsbeq	r6, r9, r1, ror #4
+87800220:	00001f01 	andeq	r1, r0, r1, lsl #30
+87800224:	54340500 	ldrtpl	r0, [r4], #-1280	@ 0xfffffb00
+87800228:	08020600 	stmdaeq	r2, {r9, sl}
+8780022c:	12010901 	andne	r0, r1, #16384	@ 0x4000
+87800230:	15011404 	strne	r1, [r1, #-1028]	@ 0xfffffbfc
+87800234:	18031701 	stmdane	r3, {r0, r8, r9, sl, ip}
+87800238:	1a011901 	bne	87846644 <__bss_end+0x46405>
+8780023c:	Address 0x8780023c is out of bounds.
+
