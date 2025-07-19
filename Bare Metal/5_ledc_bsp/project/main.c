@@ -10,10 +10,10 @@ int main(void)
 
 	while(1)
 	{	
-		led_off();
+		led_switch(LED0,ON);
 		delay(500);
 
-		led_on();
+		led_switch(LED0,OFF);
 		delay(500);
 	}
 	return 0;

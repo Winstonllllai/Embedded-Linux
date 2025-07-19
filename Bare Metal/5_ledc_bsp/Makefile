@@ -41,4 +41,4 @@ $(SOBJS): obj/%.o : %.S
 $(COBJS): obj/%.o : %.c
 	$(CC) -Wall -nostdlib -c -O2 $(INCLUDE) -o $@ $<
 clean:
-rm -rf $(TARGET).elf $(TARGET).dis $(TARGET).bin $(COBJS) $(SOBJS)
+	rm -rf $(TARGET).elf $(TARGET).dis $(TARGET).bin $(COBJS) $(SOBJS)
