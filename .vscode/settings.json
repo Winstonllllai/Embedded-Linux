@@ -1,0 +1,7 @@
+{
+    "debug.console.fontSize": 16,
+    "editor.fontSize": 16,
+    "editor.minimap.sectionHeaderFontSize": 16,
+    "scm.inputFontSize": 16,
+    "terminal.integrated.fontSize": 16
+}
